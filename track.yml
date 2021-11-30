@@ -1,15 +1,58 @@
 slug: hashicorp-and-zero-trust
+id: 16ro8mfudqxo
 type: track
-title: HashiCorp and Zero Trust
-teaser: A short description of the track.
+title: Hashicorp and Zero-Trust
+teaser: Get started quickly with just one container-based sandbox host.
 description: |-
-  A long description of the track.
+  Get started quickly with just one container-based sandbox host.
 
-  You can use any GitHub flavoured markdown.
-icon: https://storage.googleapis.com/instruqt-frontend/img/tracks/default.png
+  **This track demonstrates how to:**
+    - Use an ubuntu container as a sandbox host
+    - Add a simple check script
+    - Use a terminal tab to let the user access the host
+icon: https://cdn.instruqt.com/assets/templates/ubuntu.png
 tags: []
 owner: hashicorp
 developers:
 - daniel.fedick@hashicorp.com
-private: false
+private: true
 published: false
+show_timer: true
+challenges:
+- slug: 01-creating-a-directory
+  id: hpbfzapl8ffp
+  type: challenge
+  title: Creating a directory
+  teaser: Learn how to create directory
+  notes:
+  - type: text
+    contents: |-
+      **This is a test**
+
+      *This is only a test*
+
+      ```
+      echo "Hello"
+      ```
+
+      Of the Emergency Broadcast system
+  assignment: |-
+    Create a directory with the name `instruqt` to complete this challenge.
+
+    Use the `mkdir` command to create the directory:
+    ```
+    mkdir instruqt
+    ```
+
+    To complete this track click the **Check** button.
+  tabs:
+  - title: Shell
+    type: terminal
+    hostname: container
+  - title: VSCODE EDITOR
+    type: code
+    hostname: container
+    path: /root/
+  difficulty: basic
+  timelimit: 600
+checksum: "13631325807182314158"
