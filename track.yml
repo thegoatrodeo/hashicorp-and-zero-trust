@@ -1,0 +1,15 @@
+slug: hashicorp-and-zero-trust
+type: track
+title: HashiCorp and Zero Trust
+teaser: A short description of the track.
+description: |-
+  A long description of the track.
+
+  You can use any GitHub flavoured markdown.
+icon: https://storage.googleapis.com/instruqt-frontend/img/tracks/default.png
+tags: []
+owner: hashicorp
+developers:
+- daniel.fedick@hashicorp.com
+private: false
+published: false
