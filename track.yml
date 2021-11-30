@@ -4,12 +4,14 @@ type: track
 title: Hashicorp and Zero-Trust
 teaser: Get started quickly with just one container-based sandbox host.
 description: |-
-  Get started quickly with just one container-based sandbox host.
+  Host an application in AWS!
 
   **This track demonstrates how to:**
-    - Use an ubuntu container as a sandbox host
-    - Add a simple check script
-    - Use a terminal tab to let the user access the host
+    - Create an AWS VPC and associated Subnets using Terraform
+    - Create a Consul Cluster
+    - Create a Nomad Cluster
+    - Create a Vault Cluster
+    - Deploy a service in HashiCorp Nomad
 icon: https://cdn.instruqt.com/assets/templates/ubuntu.png
 tags: []
 owner: hashicorp
@@ -55,4 +57,4 @@ challenges:
     path: /root/
   difficulty: basic
   timelimit: 600
-checksum: "13631325807182314158"
+checksum: "4707730544575821516"
