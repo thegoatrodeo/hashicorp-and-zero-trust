@@ -1,6 +1,13 @@
 version: "2"
 containers:
-- name: container
-  image: ubuntu
+- name: cloud-client
+  image: gcr.io/instruqt/cloud-client
   shell: /bin/bash
-  memory: 256
+  ports:
+  - 80
+aws_accounts:
+- name: awsaccount
+azure_subscriptions:
+- name: azuresubscription
+  roles:
+  - Contributor

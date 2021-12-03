@@ -1,60 +1,45 @@
-slug: hashicorp-and-zero-trust
-id: 16ro8mfudqxo
+slug: multi-cloud-demo
+id: louupoysv1yr
 type: track
-title: Hashicorp and Zero-Trust
-teaser: Get started quickly with just one container-based sandbox host.
-description: |-
-  Host an application in AWS!
+title: Multi-Cloud Demo
+teaser: This is a Sandbox for a Multi-Cloud demo.
+description: |
+  This is a long description of the track -
 
-  **This track demonstrates how to:**
-    - Create an AWS VPC and associated Subnets using Terraform
-    - Create a Consul Cluster
-    - Create a Nomad Cluster
-    - Create a Vault Cluster
-    - Deploy a service in HashiCorp Nomad
-icon: https://cdn.instruqt.com/assets/templates/ubuntu.png
+  You can use any GitHub flavoured markdown.
+icon: https://storage.googleapis.com/instruqt-frontend/img/tracks/default.png
 tags: []
 owner: hashicorp
 developers:
 - daniel.fedick@hashicorp.com
-private: true
+private: false
 published: false
 show_timer: true
 challenges:
-- slug: 01-creating-a-directory
-  id: hpbfzapl8ffp
+- slug: 01-multi-cloud-challenge
+  id: 3mztnatufhk9
   type: challenge
-  title: Creating a directory
-  teaser: Learn how to create directory
+  title: Create AWS Cloud and GCP
+  teaser: Learn how to create a directory
   notes:
   - type: text
-    contents: |-
-      **This is a test**
-
-      *This is only a test*
-
-      ```
-      echo "Hello"
-      ```
-
-      Of the Emergency Broadcast system
-  assignment: |-
-    Create a directory with the name `instruqt` to complete this challenge.
-
-    Use the `mkdir` command to create the directory:
-    ```
-    mkdir instruqt
-    ```
-
-    To complete this track click the **Check** button.
+    contents: |
+      When this course starts, the following will be available:
+      - Terraform Binary
+      - AWS Organization
+        - AWS VPC
+      - Azure subscription
+  assignment: |
+    Run the following command to create the VPC:
   tabs:
-  - title: Shell
+  - title: Cloud Console/Portals
+    type: service
+    hostname: cloud-client
+    path: /
+    port: 80
+  - title: Cloud CLI
     type: terminal
-    hostname: container
-  - title: VSCODE EDITOR
-    type: code
-    hostname: container
-    path: /root/
+    hostname: cloud-client
   difficulty: basic
-  timelimit: 600
-checksum: "4707730544575821516"
+  timelimit: 6000
+checksum: "7492506134561912567"
