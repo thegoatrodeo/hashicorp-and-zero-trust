@@ -6,8 +6,10 @@ containers:
   ports:
   - 80
 aws_accounts:
-- name: awsaccount
+- name: ZT_AWS
+  managed_policies:
+  - arn:aws:iam::aws:policy/AdministratorAccess
 azure_subscriptions:
-- name: azuresubscription
+- name: ZT_AZ
   roles:
   - Contributor

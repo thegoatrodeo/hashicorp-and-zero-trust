@@ -5,6 +5,9 @@ TF_PLATFORM=linux_amd64
 TF_URL=https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_${TF_PLATFORM}.zip
 TF_DOWNLOAD=terraform_${TF_VERSION}_${TF_PLATFORM}.zip
 
+echo "source /etc/profile.d/instruqt-env.sh" >> /root/.bashrc
+source /root/.bashrc
+
 
 install_tf() {
   set-workdir /tmp
@@ -12,11 +15,30 @@ install_tf() {
   unzip ${TF_DOWNLOAD}
   mv terraform /usr/local/bin/
 }
-
 install_tf
-get_aws_vpc_repo() {
+
+
+install_aws_vpc() {
   set-workdir ~/
-  git clone https://github.com/thegoatrodeo/aws-vpc
-  set-workdir ~/aws-vpc
+  git clone https://github.com/thegoatrodeo/aws-vpc.git && set-workdir ~/aws-vpc
+  cd ~/aws-vpc
+  echo "git status"
+  git status
+  git pull && /usr/local/bin/terraform init
+  /usr/local/bin/terraform apply -var="access_key=${AWS_ACCESS_KEY_ID}" -var="secret_key=${AWS_SECRET_ACCESS_KEY}" -auto-approve
 }
-get_aws_vpc_repo
+install_aws_vpc
+
+
+
+install_azure_vnet() {
+  set-workdir ~/
+  git clone https://github.com/thegoatrodeo/azure-vnet.git && set-workdir ~/azure-vnet
+  cd ~/azure-vnet
+  echo "git status"
+  git status
+  git pull && /usr/local/bin/terraform init
+  /usr/local/bin/terraform apply -var="subscription_id=${ARM_SUBSCRIPTION_ID}" -var="client_id=${ARM_CLIENT_ID}" -var="client_secret=${ARM_CLIENT_SECRET}" -var="tenant_id=${ARM_TENANT_ID}" -auto-approve
+}
+install_azure_vnet
+

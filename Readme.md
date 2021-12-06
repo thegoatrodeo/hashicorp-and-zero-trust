@@ -3,7 +3,7 @@ title: Readme.md
 tags: readme build script
 ---
 
-# Track.yml 
+# File: track.yml 
 
 The [Track.yml](https://docs.instruqt.com/tracks/configuration/track) sets up the guide that walks you through the instruction.  This is where the instructions for each step are created.  The first part of the `track.yml` sets up the overall course description.  (Title, description, teaser, owner etc..). 
 
@@ -27,7 +27,7 @@ published: false
 show_timer: true
 ```
 
-### Challenges
+### Track challenges
 [Challenges](https://docs.instruqt.com/tracks/configuration/track#challenge) specify the the title, teaser description and any other information about each challenge.  
 The `id` is created and spliced into each challenge when the `instruqt track push` command to push the latest changes of the course  to the Instruqt platform.
 
@@ -44,17 +44,28 @@ challenges:
       When this course starts, the following will be available: 
       - Terraform Binary 
       - AWS Organization 
-        - AWS VPC 
+        - Github repsitory for creating an AWS VPC 
       - Azure subscription 
+        - Github repository for creating an Azure VNET
 ```
 
 The assignment field is the title of the challenge.  
 ```yaml tangle:./track.yml
-  assignment: |
-    Run the following command to create the VPC: 
-    ```
-    terraform apply -var="access_key=${AWS_ACCESS_KEY_ID}" -var="secret_key=${AWS_SECRET_ACCESS_KEY}"
-    ```
+  assignment: |-
+
+    Run the following command to create the AWS VPC: 
+    ~~~
+    terraform init
+    terraform apply -var="access_key=${AWS_ACCESS_KEY_ID}" -var="secret_key=${AWS_SECRET_ACCESS_KEY}" -auto-approve
+    ~~~
+
+    Run the following command to create the Azure VNET: 
+    
+    ~~~
+    terraform init
+    terraform apply -var="subscription_id=${ARM_SUBSCRIPTION_ID}" -var="client_id=${ARM_CLIENT_ID}" -var="client_secret=${ARM_CLIENT_SECRET}" -var="tenant_id=${ARM_TENANT_ID}" -auto-approve
+    ~~~
+
 ```
 
 The Tabs are available at the top of the web browser while going through each challenge.  Below, we've setup a tab to access a shell terminal.  Also we've setup access to the AWS Console and Azure Portal. 
@@ -82,10 +93,10 @@ The difficulty can be expressed as `basic`,   `intermediate`, `advanced` or `exp
 The following checksum is created and spliced into the file after the `instruqt track push` command is run to push the course up to the Instruqt platform.
 
 ```yaml tangle:./track.yml
-checksum: "12924893148077563444"
+checksum: "1863619039018504566"
 ```
 
-# Config.yml
+# File: config.yml
 
 Setup the [Instruqt cloud-client](https://docs.instruqt.com/sandbox-environment/cloud-accounts#accessing-google-cloud-projects) (Hosted by GCR) that has the Azure/AWS/GCP cli access tools.  This client will be used as the interface for the learner to access the CSP's (Cloud Service Providers) and run shell commands within the tracks.
 
@@ -103,7 +114,7 @@ Once the subscription is created, the information about the subscription can be 
 
 ```yaml tangle:./config.yml
 azure_subscriptions:
-- name: azuresubscription
+- name: ZT_AZ
   roles:
   - Contributor
 ``` 
@@ -112,11 +123,13 @@ Setup the [Instruqt AWS Subscription](https://docs.instruqt.com/sandbox-environm
 
 ```yaml tangle:./config.yml
 aws_accounts:
-- name: awsaccount
+- name: ZT_AWS
+  managed_policies:
+  - arn:aws:iam::aws:policy/AdministratorAccess
 ```
 
 
-# setup-cloud-client shell script
+# File: setup-cloud-client 
 
 Set the Variables for Terraform Version and Download link.
 The [Terraform Download Page](https://www.terraform.io/downloads.html) can be used to get and change the latest version or platform for the Terraform binary.
@@ -128,6 +141,9 @@ TF_VERSION=1.0.11
 TF_PLATFORM=linux_amd64
 TF_URL=https://releases.hashicorp.com/terraform/${TF_VERSION}/terraform_${TF_VERSION}_${TF_PLATFORM}.zip
 TF_DOWNLOAD=terraform_${TF_VERSION}_${TF_PLATFORM}.zip
+
+echo "source /etc/profile.d/instruqt-env.sh" >> /root/.bashrc
+source /root/.bashrc
 
 ```
 
@@ -144,18 +160,45 @@ install_tf() {
   unzip ${TF_DOWNLOAD}
   mv terraform /usr/local/bin/
 }
-
 install_tf
+
 ```
 
 ## Get the repository that creates the AWS VPC
 Get the aws-vpc repository from Github. This is a public repository, so no git credentials necessary.
 
 ```bash tangle:./track_scripts/setup-cloud-client
-get_aws_vpc_repo() {
+
+install_aws_vpc() {
   set-workdir ~/
-  git clone https://github.com/thegoatrodeo/aws-vpc
-  set-workdir ~/aws-vpc
+  git clone https://github.com/thegoatrodeo/aws-vpc.git && set-workdir ~/aws-vpc
+  cd ~/aws-vpc
+  echo "git status"
+  git status
+  git pull && /usr/local/bin/terraform init
+  /usr/local/bin/terraform apply -var="access_key=${AWS_ACCESS_KEY_ID}" -var="secret_key=${AWS_SECRET_ACCESS_KEY}" -auto-approve
 }
-get_aws_vpc_repo
+install_aws_vpc
+
 ```
+
+
+## Get the repository that creates the Azure VNET
+Get the azure-vnet repository from Github. This is a public repository, so no git credentials necessary.
+
+```bash tangle:./track_scripts/setup-cloud-client
+
+
+install_azure_vnet() {
+  set-workdir ~/
+  git clone https://github.com/thegoatrodeo/azure-vnet.git && set-workdir ~/azure-vnet
+  cd ~/azure-vnet
+  echo "git status"
+  git status
+  git pull && /usr/local/bin/terraform init
+  /usr/local/bin/terraform apply -var="subscription_id=${ARM_SUBSCRIPTION_ID}" -var="client_id=${ARM_CLIENT_ID}" -var="client_secret=${ARM_CLIENT_SECRET}" -var="tenant_id=${ARM_TENANT_ID}" -auto-approve
+}
+install_azure_vnet
+
+```
+

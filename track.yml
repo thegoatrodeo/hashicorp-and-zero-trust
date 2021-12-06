@@ -27,10 +27,23 @@ challenges:
       When this course starts, the following will be available:
       - Terraform Binary
       - AWS Organization
-        - AWS VPC
+        - Github repsitory for creating an AWS VPC
       - Azure subscription
-  assignment: |
-    Run the following command to create the VPC:
+        - Github repository for creating an Azure VNET
+  assignment: |2-
+
+    Run the following command to create the AWS VPC:
+    ~~~
+    terraform init
+    terraform apply -var="access_key=${AWS_ACCESS_KEY_ID}" -var="secret_key=${AWS_SECRET_ACCESS_KEY}" -auto-approve
+    ~~~
+
+    Run the following command to create the Azure VNET:
+
+    ~~~
+    terraform init
+    terraform apply -var="subscription_id=${ARM_SUBSCRIPTION_ID}" -var="client_id=${ARM_CLIENT_ID}" -var="client_secret=${ARM_CLIENT_SECRET}" -var="tenant_id=${ARM_TENANT_ID}" -auto-approve
+    ~~~
   tabs:
   - title: Cloud Console/Portals
     type: service
@@ -42,4 +55,4 @@ challenges:
     hostname: cloud-client
   difficulty: basic
   timelimit: 6000
-checksum: "7492506134561912567"
+checksum: "1863619039018504566"
