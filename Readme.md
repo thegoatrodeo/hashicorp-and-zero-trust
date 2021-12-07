@@ -46,7 +46,7 @@ show_timer: true
 
 ### Track challenges
 [Challenges](https://docs.instruqt.com/tracks/configuration/track#challenge) specify the the title, teaser description and any other information about each challenge.  
-The `id` is created and spliced into each challenge when the `instruqt track push` command to push the latest changes of the course  to the Instruqt platform.
+The `id` is created and spliced into each challenge when the `instruqt track push` command is run to push the latest changes of the course  to the Instruqt platform.
 
 ```yaml tangle:./track.yml
 challenges:
