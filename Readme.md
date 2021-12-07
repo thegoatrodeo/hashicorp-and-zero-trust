@@ -66,7 +66,9 @@ challenges:
         - Github repository for creating an Azure VNET
 ```
 
-The assignment field is the title of the challenge.  
+The assignment field is where the instructions in the Instruqt sidebar is created.  
+Because there are nested code blocks, we use the `~~~` characters to pass through the codeblock to the sidebar.
+
 ```yaml tangle:./track.yml
   assignment: |-
 
@@ -110,7 +112,7 @@ The difficulty can be expressed as `basic`,   `intermediate`, `advanced` or `exp
 The following checksum is created and spliced into the file after the `instruqt track push` command is run to push the course up to the Instruqt platform.
 
 ```yaml tangle:./track.yml
-checksum: "17167258007269407710"
+checksum: "13644327770291811785"
 ```
 
 ## File: config.yml
@@ -207,11 +209,12 @@ Get the azure-vnet repository from Github. This is a public repository, so no gi
 
 
 install_azure_vnet() {
-  set-workdir ~/
+  cd /root
+  echo "PWD:: ${pwd}"
   echo "############################"
   echo "ARM_SUBSCRIPTION_ID: ${ARM_SUBSCRIPTION_ID}"
   echo "############################"
-  git clone https://github.com/thegoatrodeo/azure-vnet.git && set-workdir ~/azure-vnet
+  git clone https://github.com/thegoatrodeo/azure-vnet.git 
   cd ~/azure-vnet
   echo "git status"
   git status
