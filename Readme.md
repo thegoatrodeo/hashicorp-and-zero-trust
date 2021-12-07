@@ -3,9 +3,23 @@ title: Readme.md
 tags: readme build script
 ---
 
-# File: track.yml 
+# Hashicorp and Zero Trust 
 
-The [Track.yml](https://docs.instruqt.com/tracks/configuration/track) sets up the guide that walks you through the instruction.  This is where the instructions for each step are created.  The first part of the `track.yml` sets up the overall course description.  (Title, description, teaser, owner etc..). 
+This codebase is designed to create an Instruqt workshop demonstrating a complete multi-cloud, HashiCorp Zero-Trust platform.  In this workshop, we are creating the following: 
+
+- Two Cloud environments
+  - [Azure VNET](https://github.com/thegoatrodeo/azure-vnet)
+  - [AWS VPC](https://github.com/thegoatrodeo/aws-vpc)
+- VPC Peering between the two cloud environments
+- HashiCorp Consul Service Network connecting the two environments.
+- HashiCorp Boundary for entry into the environment
+- HashiCorp Vault for Secrets Management and mTLS auth between applpications
+- 2 Applications
+- SSO - via Active Directory integrated with Vault
+
+## File: track.yml 
+
+The [Track.yml](https://docs.instruqt.com/tracks/configuration/track) sets up the overall course an each track within the course.  This is where instructions for each step are created.  The first part of the `track.yml` lays out the overall course details, including:  *title, description, teaser, owner* etc..   
 
 ```yaml  tangle:./track.yml
 type: track
@@ -13,6 +27,9 @@ slug: multi-cloud-demo
 id: louupoysv1yr
 title: Multi-Cloud Demo
 teaser: This is a Sandbox for a Multi-Cloud demo.
+contents: |
+  You are being provisioned on-demand cloud infrastructure. <br>
+  Please be patient as this can take up to ~15 minutes.
 description: |
   This is a long description of the track -
 
@@ -93,10 +110,10 @@ The difficulty can be expressed as `basic`,   `intermediate`, `advanced` or `exp
 The following checksum is created and spliced into the file after the `instruqt track push` command is run to push the course up to the Instruqt platform.
 
 ```yaml tangle:./track.yml
-checksum: "1863619039018504566"
+checksum: "17167258007269407710"
 ```
 
-# File: config.yml
+## File: config.yml
 
 Setup the [Instruqt cloud-client](https://docs.instruqt.com/sandbox-environment/cloud-accounts#accessing-google-cloud-projects) (Hosted by GCR) that has the Azure/AWS/GCP cli access tools.  This client will be used as the interface for the learner to access the CSP's (Cloud Service Providers) and run shell commands within the tracks.
 
@@ -129,7 +146,7 @@ aws_accounts:
 ```
 
 
-# File: setup-cloud-client 
+## File: setup-cloud-client 
 
 Set the Variables for Terraform Version and Download link.
 The [Terraform Download Page](https://www.terraform.io/downloads.html) can be used to get and change the latest version or platform for the Terraform binary.
@@ -191,6 +208,9 @@ Get the azure-vnet repository from Github. This is a public repository, so no gi
 
 install_azure_vnet() {
   set-workdir ~/
+  echo "############################"
+  echo "ARM_SUBSCRIPTION_ID: ${ARM_SUBSCRIPTION_ID}"
+  echo "############################"
   git clone https://github.com/thegoatrodeo/azure-vnet.git && set-workdir ~/azure-vnet
   cd ~/azure-vnet
   echo "git status"

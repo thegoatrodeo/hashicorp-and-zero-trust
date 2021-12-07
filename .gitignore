@@ -5,6 +5,9 @@
 *.tfstate
 *.tfstate.*
 
+# VSCODE Workspaces:
+*.code-workspace
+
 # Crash log files
 crash.log
 
