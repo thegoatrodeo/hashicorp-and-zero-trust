@@ -10,13 +10,15 @@ This codebase is designed to create an Instruqt workshop demonstrating a complet
 - Two Cloud environments
   - [Azure VNET](https://github.com/thegoatrodeo/azure-vnet)
   - [AWS VPC](https://github.com/thegoatrodeo/aws-vpc)
-- VPC Peering between the two cloud environments
+- VPC Peering between the two cloud environments.
 - HashiCorp Consul Service Network connecting the two environments.
-- HashiCorp Boundary for entry into the environment
-- HashiCorp Vault for Secrets Management and mTLS auth between applpications
+- HashiCorp Boundary for entry into the environment.
+- HashiCorp Vault for Secrets Management and mTLS auth between applications.
 - 2 Applications
-- SSO - via Active Directory integrated with Vault
+- SSO - via Active Directory integrated with Vault.
 
+
+---
 ## File: track.yml 
 
 The [Track.yml](https://docs.instruqt.com/tracks/configuration/track) sets up the overall course an each track within the course.  This is where instructions for each step are created.  The first part of the `track.yml` lays out the overall course details, including:  *title, description, teaser, owner* etc..   
@@ -66,8 +68,8 @@ challenges:
         - Github repository for creating an Azure VNET
 ```
 
-The assignment field is where the instructions in the Instruqt sidebar is created.  
-Because there are nested code blocks, we use the `~~~` characters to pass through the codeblock to the sidebar.
+The assignment field is where the instructions in the Instruqt sidebar are created.  
+In this Readme case there are nested code blocks so we use the `~~~` characters to pass through the codeblock to the sidebar.
 
 ```yaml tangle:./track.yml
   assignment: |-
@@ -87,7 +89,7 @@ Because there are nested code blocks, we use the `~~~` characters to pass throug
 
 ```
 
-The Tabs are available at the top of the web browser while going through each challenge.  Below, we've setup a tab to access a shell terminal.  Also we've setup access to the AWS Console and Azure Portal. 
+The Tabs are available at the top of the web browser while going through each challenge.  Below, we've setup a tab to access a shell terminal in the first assignment.  Also we've setup access to the AWS Console and Azure Portal. 
 ```yaml tangle:./track.yml
   tabs:
   - title: Cloud Console/Portals
@@ -115,6 +117,7 @@ The following checksum is created and spliced into the file after the `instruqt 
 checksum: "13644327770291811785"
 ```
 
+---
 ## File: config.yml
 
 Setup the [Instruqt cloud-client](https://docs.instruqt.com/sandbox-environment/cloud-accounts#accessing-google-cloud-projects) (Hosted by GCR) that has the Azure/AWS/GCP cli access tools.  This client will be used as the interface for the learner to access the CSP's (Cloud Service Providers) and run shell commands within the tracks.
@@ -147,10 +150,12 @@ aws_accounts:
   - arn:aws:iam::aws:policy/AdministratorAccess
 ```
 
-
+---
 ## File: setup-cloud-client 
+The setup-cloud-client script is the script that is run when Instruqt initially loads.  To successfully start the Instruqt lab, all instructions in setup script need to be run with an `exit 0`.
 
-Set the Variables for Terraform Version and Download link.
+
+Set the variables for Terraform version and download link.
 The [Terraform Download Page](https://www.terraform.io/downloads.html) can be used to get and change the latest version or platform for the Terraform binary.
 
 ```bash tangle:./track_scripts/setup-cloud-client
