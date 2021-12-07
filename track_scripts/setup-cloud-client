@@ -32,11 +32,12 @@ install_aws_vpc
 
 
 install_azure_vnet() {
-  set-workdir ~/
+  cd /root
+  echo "PWD:: ${pwd}"
   echo "############################"
   echo "ARM_SUBSCRIPTION_ID: ${ARM_SUBSCRIPTION_ID}"
   echo "############################"
-  git clone https://github.com/thegoatrodeo/azure-vnet.git && set-workdir ~/azure-vnet
+  git clone https://github.com/thegoatrodeo/azure-vnet.git 
   cd ~/azure-vnet
   echo "git status"
   git status
